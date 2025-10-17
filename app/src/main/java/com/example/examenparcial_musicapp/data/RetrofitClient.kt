@@ -11,7 +11,9 @@ import retrofit2.http.Path
 object RetrofitClient {
     private const val BASE_URL = "https://music.juanfrausto.com/"
 
-    private val moshi = Moshi.Builder().build()
+    private val moshi = Moshi.Builder()
+        .add(com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory()) // <<-- importante
+        .build()
 
     val api: MusicApi by lazy {
         Retrofit.Builder()
