@@ -44,7 +44,7 @@ import kotlinx.coroutines.withContext
 
 @Composable
 fun HomeScreen(
-    onAlbumClick: (String) -> Unit,
+    onAlbumClick: (Album) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val albumsState = remember { mutableStateListOf<Album>() }
@@ -161,7 +161,7 @@ fun HomeScreen(
                     items(albumsState) { album ->
                         AlbumCardLarge(
                             album = album,
-                            onClick = { onAlbumClick(album.albumId) },
+                            onClick = { onAlbumClick(album) }, // ✅ pasamos el objeto Album
                             onPlayClick = {
                                 if (currentAlbumId == album.albumId) isPlaying = !isPlaying
                                 else {
@@ -198,7 +198,7 @@ fun HomeScreen(
                 items(albumsState) { album ->
                     SmallRecentlyPlayedItem(
                         album = album,
-                        onClick = { onAlbumClick(album.albumId) },
+                        onClick = { onAlbumClick(album) }, // ✅ igual aquí
                         onPlayClick = {
                             if (currentAlbumId == album.albumId) isPlaying = !isPlaying
                             else {
